@@ -9,3 +9,10 @@ jobs:
     steps:
      - name: Print message
        run: echo "Hello!!"
+
+  say-bye:
+    runs-on: ubuntu-latest
+
+    steps: 
+     - name: Print message
+       run: echo "Byee!!"
