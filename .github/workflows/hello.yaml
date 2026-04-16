@@ -1,18 +1,40 @@
-name: My first workflow
+# name: My first workflow
 
-on: push
+# on: push
+
+# jobs:
+#   say-hello:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#      - name: Print message
+#        run: echo "Hello!!"
+
+#   say-bye:
+#     runs-on: ubuntu-latest
+
+#     steps: 
+#      - name: Print message
+#        run: echo "Byee!!"
+
+name: PR Workflow
+
+on:
+  pull_request:
+    branches: [ main ]
 
 jobs:
   say-hello:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Print message
-       run: echo "Hello!!"
+      - name: Print message
+        run: echo "Hello from Pull Request!"
 
   say-bye:
+    needs: say-hello
     runs-on: ubuntu-latest
 
-    steps: 
-     - name: Print message
-       run: echo "Byee!!"
+    steps:
+      - name: Print goodbye
+        run: echo "Goodbye from PR!"
