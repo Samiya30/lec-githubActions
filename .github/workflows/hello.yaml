@@ -1,40 +1,76 @@
-# name: My first workflow
+# name: My First Workflow
 
-# on: push
+# on : push
 
 # jobs:
 #   say-hello:
 #     runs-on: ubuntu-latest
 
 #     steps:
-#      - name: Print message
-#        run: echo "Hello!!"
+#       - name: Print message
+#         run: echo "Hello, Github Actions!"
+#       - name: Print my name
+#         run: echo "Samiya Sharma"
+#       - name: bye message
+#         run: echo "Bye, Github Actions!"
+
+
+# name: My Second Workflow
+
+# on:
+#   push:
+#   pull_request:
+
+# jobs:
+#   say-hello:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Print message
+#         run: echo "Hello, Github Actions!"
+#       - name: Print my name
+#         run: echo "Samiya Sharma"
+#       - name: bye message
+#         run: echo "Bye, Github Actions!"
+
+
+
+
+
+# name: My Third Workflow
+
+# on: push
+
+# jobs:
+#   say-hello:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Job 1 Step
+#         run: echo "Hello from Job 1"
 
 #   say-bye:
 #     runs-on: ubuntu-latest
+#     needs: say-hello
+#     steps:
+#       - name: Job 2 Step
+#         run: echo "Bye Ridhima, from Job 2"
 
-#     steps: 
-#      - name: Print message
-#        run: echo "Byee!!"
 
-name: PR Workflow
 
-on:
-  pull_request:
-    branches: [ main ]
+
+name: My Third Workflow
+
+on: push
 
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Print message
-        run: echo "Hello from Pull Request!"
+      # - name: checkout code
+      #   uses: actions/checkout@v4
 
-  say-bye:
-    needs: say-hello
-    runs-on: ubuntu-latest
+      - name: list file
+        run: ls
 
-    steps:
-      - name: Print goodbye
-        run: echo "Goodbye from PR!"
+      - name: node version
+        run: node -v
