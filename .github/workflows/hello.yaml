@@ -75,8 +75,21 @@ jobs:
       - name: node version
         run: node -v
 
-      # - name: install dependencies
-      #   run: 
+      - name: install dependencies
+        run: npm i
 
       - name: starting test
         run: npm run test
+
+  deploy-app:
+    needs: say-hello   
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout code
+      uses: actions/checkout@v4
+
+    - name: install dependencies
+        run: npm i
+        
+    - name: start server
+      run: node server.js
