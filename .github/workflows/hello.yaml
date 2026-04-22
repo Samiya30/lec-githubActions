@@ -81,6 +81,22 @@ jobs:
       - name: starting test
         run: npm run test
 
+  lint-build:
+    needs: say-hello
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install dependencies
+        run: npm i
+
+      - name: run lint
+        run: npm run lint
+
+      - name: build project
+        run: npm run build
+
   deploy-app:
     needs: say-hello   
     runs-on: ubuntu-latest
