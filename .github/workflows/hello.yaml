@@ -92,7 +92,7 @@ jobs:
         run: npm i
 
       - name: run lint
-        run: npm run lint
+        run: npx eslint .
 
       - name: build project
         run: npm run build
