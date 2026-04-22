@@ -112,8 +112,8 @@ jobs:
       - name: install dependencies
         run: npm i
 
-      - name: run linter
-        run: npm run lint
+      - name: npx linter
+        run: npx eslint .
 
   say-hello:
     needs: lint-code
