@@ -98,82 +98,82 @@
 
 
 # hw add linting and code build
-name: Clone repo workflow
+# name: Clone repo workflow
 
-on: push
+# on: push
 
-jobs:
+# jobs:
 
-  lint:
-    runs-on: ubuntu-latest
+#   lint:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: npm
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
+#           cache: npm
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Run lint
-        run: npm run lint
-
-
-  build:
-    runs-on: ubuntu-latest
-    needs: lint
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
+#       - name: Run lint
+#         run: npm run lint
 
 
-  test:
-    runs-on: ubuntu-latest
-    needs: build
+#   build:
+#     runs-on: ubuntu-latest
+#     needs: lint
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Install dependencies
+#         run: npm install
 
-      - name: Run tests
-        run: npm run test
+#       - name: Build project
+#         run: npm run build
 
 
-  deploy-app:
-    needs: test
-    runs-on: ubuntu-latest
+#   test:
+#     runs-on: ubuntu-latest
+#     needs: build
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: npm install
+#       - name: Setup Node
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
 
-      - name: Start server
-        run: node server.js
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Run tests
+#         run: npm run test
+
+
+#   deploy-app:
+#     needs: test
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Start server
+#         run: node server.js
