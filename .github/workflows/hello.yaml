@@ -98,69 +98,63 @@
 
 
 name: My Third Workflow
-on:
-  push:
+
+on: push
+
 jobs:
-  lint:
+  lint-code:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - name: Install dependencies
-        run: npm ci
-      - name: Run lint
+
+      - name: install dependencies
+        run: npm i
+
+      - name: run linter
         run: npm run lint
-  build:
+
+  say-hello:
+    needs: lint-code
     runs-on: ubuntu-latest
-    needs: lint
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - name: Install dependencies
-        run: npm ci
-      - name: Build project
-        run: npm run build
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - name: List files
+
+      - name: list file
         run: ls
-      - name: Show Node version
+
+      - name: node version
         run: node -v
-      - name: Install dependencies
-        run: npm ci
-      - name: Run tests
-        run: npm test
-  deploy-app:
+
+      - name: install dependencies
+        run: npm i
+
+      - name: starting test
+        run: npm run test
+
+  build-app:
+    needs: say-hello
     runs-on: ubuntu-latest
-    needs: test
     steps:
-      - name: Checkout code
+      - name: checkout code
         uses: actions/checkout@v4
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-      - name: Install dependencies
-        run: npm ci
-      - name: Start server
+
+      - name: install dependencies
+        run: npm i
+
+      - name: build project
+        run: npm run build
+
+  deploy-app:
+    needs: build-app
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: install dependencies
+        run: npm i
+
+      - name: start server
         run: node server.js
